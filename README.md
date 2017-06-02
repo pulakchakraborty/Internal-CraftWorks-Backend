@@ -1,6 +1,6 @@
-# sebamaster-movie-backend application
+# CraftWorks-Backend application
 
-sebamaster-movie-frontend application can be found [here](https://github.com/sebischair/sebamaster-movie-frontend)
+CraftWorks-Frontend application can be found [here](https://github.com/pulakchakraborty/Internal-CraftWorks-Frontend)
 
 ## Prerequisites
 
@@ -12,12 +12,16 @@ Just for the backend application:
 
 * mongodb [official installation guide](https://docs.mongodb.org/manual/administration/install-community/)
 
-## Setup (before first run)
+### Clone CraftWork Project Backend
 
-go to your project root folder via command line
+Clone the [Internal-CraftWorks-Backend](https://github.com/pulakchakraborty/Internal-CraftWorks-Backend)  repository using [git](http://git-scm.com/):
+
 ```
-cd path/to/workspace/sebamaster-movie-frontend
+git clone https://github.com/pulakchakraborty/Internal-CraftWorks-Backend
+cd Internal-CraftWorks-Backend
 ```
+
+## Setup (before first run)
 
 **install node dependencies**
 
