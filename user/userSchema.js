@@ -9,6 +9,7 @@ var userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+/*
 
     userFirstName: {
         type: String,
@@ -25,13 +26,14 @@ var userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+*/
 
     password: {
         type: String,
         required: true
-    },
+    }
 
-    userAddress1: {
+/*    userAddress1: {
         type: String,
         required: true
     },
@@ -80,7 +82,7 @@ var userSchema = mongoose.Schema({
     userUpcomingEvents: { // TODO: Change type if implemented
         type: String,
         required: false
-    }
+    }*/
 });
 
 userSchema.pre('save', function(next) {

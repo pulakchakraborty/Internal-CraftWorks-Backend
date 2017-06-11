@@ -1,4 +1,3 @@
-/*
 module.exports = productRoutes;
 
 
@@ -15,14 +14,13 @@ function productRoutes(passport) {
     router.use(mw.unless({method: ['GET', 'OPTIONS']}));
 
     router.route('/')
-        .post(movieController.postMovie)
-        .get(movieController.getMovies);
+        .post(productController.postProduct)
+        .get(productController.getProducts);
 
-    router.route('/:movie_id')
-        .get(movieController.getMovie)
-        .put(movieController.putMovie)
-        .delete(movieController.deleteMovie);
+    router.route('/:product_id')
+        .get(productController.getProduct)
+        .put(productController.putProduct)
+        .delete(productController.deleteProduct);
 
     return router;
 }
-*/

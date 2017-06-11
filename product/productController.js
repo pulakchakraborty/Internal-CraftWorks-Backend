@@ -1,13 +1,12 @@
-/*
-// importing Product model
+// importing Movie model
 var Product = require('./productSchema');
-exports.postMovie = function(req, res) {
-    var movie = new Movie(req.body);
+exports.postProduct = function(req, res) {
+    var product = new Product(req.body);
     //do not allow user to fake identity. The user who postet the movie must be the same user that is logged in
-    if (!req.user.equals(movie.user)) {
+    if (!req.user.equals(product.user)) {
         res.sendStatus(401);
     }
-    movie.save(function(err, m) {
+    product.save(function(err, m) {
         if (err) {
             res.status(400).send(err);
             return;
@@ -16,50 +15,50 @@ exports.postMovie = function(req, res) {
     });
 };
 // Create endpoint /api/movies for GET
-exports.getMovies = function(req, res) {
-    Movie.find(function(err, movies) {
+exports.getProducts = function(req, res) {
+    Product.find(function(err, products) {
         if (err) {
             res.status(400).send(err);
             return;
         }
-        res.json(movies);
+        res.json(products);
     });
 };
 // Create endpoint /api/movies/:movie_id for GET
-exports.getMovie = function(req, res) {
+exports.getProduct = function(req, res) {
     // Use the Movie model to find a specific movie
-    Movie.findById(req.params.movie_id, function(err, movie) {
+    Product.findById(req.params.product_id, function(err, product) {
         if (err) {
             res.status(400).send(err)
             return;
         };
 
-        res.json(movie);
+        res.json(product);
     });
 };
 // Create endpoint /api/movies/:movie_id for PUT
-exports.putMovie = function(req, res) {
+exports.putProduct = function(req, res) {
     // Use the Movie model to find a specific movie and update it
-    Movie.findByIdAndUpdate(
-        req.params.movie_id,
+    Product.findByIdAndUpdate(
+        req.params.product_id,
         req.body,
         {
             //pass the new object to cb function
             new: true,
             //run validations
             runValidators: true
-        }, function (err, movie) {
-        if (err) {
-            res.status(400).send(err);
-            return;
-        }
-        res.json(movie);
-    });
+        }, function (err, product) {
+            if (err) {
+                res.status(400).send(err);
+                return;
+            }
+            res.json(product);
+        });
 };
 // Create endpoint /api/movies/:movie_id for DELETE
-exports.deleteMovie = function(req, res) {
+exports.deleteProduct = function(req, res) {
     // Use the Beer model to find a specific beer and remove it
-    Movie.findById(req.params.movie_id, function(err, m) {
+    Product.findById(req.params.product_id, function(err, m) {
         if (err) {
             res.status(400).send(err);
             return;
@@ -67,4 +66,4 @@ exports.deleteMovie = function(req, res) {
         m.remove();
         res.sendStatus(200);
     });
-};*/
+};

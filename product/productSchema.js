@@ -1,4 +1,3 @@
-/*
 // Load required packages
 var mongoose = require('mongoose');
 
@@ -26,4 +25,4 @@ var Product   = new mongoose.Schema({
 });
 
 // Export the Mongoose model
-module.exports = mongoose.model('Product', Product);*/
+module.exports = mongoose.model('Product', Product);
