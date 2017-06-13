@@ -3,22 +3,22 @@ var mongoose = require('mongoose');
 
 // Define our product schema
 var Product   = new mongoose.Schema({
-    productName: String,
-    productDescription: String,
-    productShortDescription: String,
-    productKeyword: String,
-    productCatID: Number,
-    productSubCatID: Number,
-    productColor: String,
-    productCustomizable: Boolean,
-    productDesignerShop: Number,
-    productDeliveryTime: Number,
-    productDeliveryRegion: String,
-    productWeight: Number,
-    productPrice: Number,
-    productStock: Number,
-    productListingPeriod: Number,
-    user: {
+    name: String,
+    description: String,
+    shortDescription: String,
+    category: String,
+    subcategory: String,
+    color: String,
+    customizable: { type: Boolean, default: false },
+    weight: Number,
+    price: Number,
+    stock: Number,
+    orderedNum: { type: Number, default: 0 },
+    listingPeriod: { type: Number, default: 120 },
+    isActive: { type: Boolean, default: true },
+    updated: {type: Date, default: Date.now},
+    imagePath: String,
+    seller: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
