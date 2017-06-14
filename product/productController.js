@@ -3,7 +3,7 @@ var Product = require('./productSchema');
 exports.postProduct = function(req, res) {
     var product = new Product(req.body);
     //do not allow user to fake identity. The user who postet the product must be the same user that is logged in
-    if (!req.user.equals(product.user)) {
+    if (!req.user.equals(product.seller)) {
         res.sendStatus(401);
         return;
     }
