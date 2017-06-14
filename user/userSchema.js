@@ -63,8 +63,14 @@ var userSchema = mongoose.Schema({
     },
 
     paymentMethod: {
-        type: Array,
-        required: false
+        isIban: {
+            type: Boolean,
+            required: false
+        },
+        isPaypal: {
+            type: Boolean,
+            required: false
+        }
     },
 
     iban: {

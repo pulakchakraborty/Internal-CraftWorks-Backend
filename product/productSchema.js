@@ -8,7 +8,7 @@ var Product   = new mongoose.Schema({
     shortDescription: String,
     category: String,
     subcategory: String,
-    color: String,
+    color: Array,
     customizable: { type: Boolean, default: false },
     weight: Number,
     price: Number,
