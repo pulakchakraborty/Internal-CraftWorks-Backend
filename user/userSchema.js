@@ -9,80 +9,86 @@ var userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-/*
 
-    userFirstName: {
+
+    firstName: {
         type: String,
-        required: true
+        required: false
     },
 
-    userLastName: {
+    lastName: {
         type: String,
-        required: true
+        required: false
     },
 
-    userEmail: {
+    email: {
         type: String,
-        required: true,
+        required: false,
         unique: true
     },
-*/
 
     password: {
         type: String,
         required: true
-    }
-
-/*    userAddress1: {
-        type: String,
-        required: true
     },
 
-    userAddress2: {
+    addressLine1: {
         type: String,
         required: false
     },
 
-    userCity: {
+    addressLine2: {
         type: String,
-        required: true
+        required: false
     },
 
-    userState: {
+    city: {
         type: String,
-        required: true
+        required: false
     },
 
-    userZIP: {
-        type: Number,
-        required: true
+    state: {
+        type: String,
+        required: false
     },
 
-    userPhone: {
+    zip: {
         type: Number,
         required: false
     },
 
-    userPaypal: {
+    phone: {
         type: String,
         required: false
     },
 
-    userIsDesigner: {
+    paymentMethod: {
+        type: Array,
+        required: false
+    },
+
+    iban: {
+        type: String,
+        required: false
+    },
+
+    paypal: {
+        type: String,
+        required: false
+    },
+
+    isDesigner: {
         type: Boolean,
-        required: true
+        required: true,
+        default: true
     },
 
-    userShopID: {
+    deliveryTime: {
         type: Number,
         required: true,
-        unique: true
-    },
+        default: 5
+    }
 
-    userUpcomingEvents: { // TODO: Change type if implemented
-        type: String,
-        required: false
-    }*/
 });
 
 userSchema.pre('save', function(next) {
