@@ -45,15 +45,15 @@ var Product   = new mongoose.Schema({
     weight: Number,
     size: {
         height: {
-            type: number,
+            type: Number,
             required: false
         },
         breadth: {
-            type: number,
+            type: Number,
             required: false
         },
         depth: {
-            type: number,
+            type: Number,
             required: false
         }
     },
