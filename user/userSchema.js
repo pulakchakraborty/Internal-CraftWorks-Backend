@@ -89,6 +89,17 @@ var userSchema = mongoose.Schema({
         default: true
     },
 
+    isFeatured: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+
+    imagePath: {
+        type: String,
+        required: false
+    },
+
     deliveryTime: {
         type: Number,
         required: true,
