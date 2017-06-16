@@ -22,5 +22,8 @@ function productRoutes(passport) {
         .put(productController.putProduct)
         .delete(productController.deleteProduct);
 
+    router.route('/seller/:seller_id')
+        .get(productController.getSellerProducts);
+
     return router;
 }
