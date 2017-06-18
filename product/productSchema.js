@@ -36,42 +36,19 @@ var Product   = new mongoose.Schema({
         isViolette: {
             type: Boolean,
             required: false
-        }
-    },
-    customizable: {
-        type: Boolean,
-        default: false
-    },
-    weight: Number,
-    size: {
-        height: {
-            type: Number,
+        },
+        isWhite: {
+            type: Boolean,
             required: false
         },
-        breadth: {
-            type: Number,
-            required: false
-        },
-        depth: {
-            type: Number,
+        isBlack: {
+            type: Boolean,
             required: false
         }
     },
-    price: Number,
+    weight: String,
+    price: String,
     stock: Number,
-    orderedNum: {
-        type: Number,
-        default: 0
-    },
-    listingPeriod: {
-        type: Number,
-        default: 120
-    },
-    listingAutoRenewal: {
-        type: Boolean,
-        required: true,
-        default: true
-    },
     isActive: {
         type: Boolean,
         default: true
@@ -81,19 +58,7 @@ var Product   = new mongoose.Schema({
         default: Date.now
     },
     imagePath: String,
-    daysNeededToSend: Number,
-    deliveryTime: Number,
-    deliveryCost: String,
-    deliveryOption: {
-        isExpress: {
-            type: Boolean,
-            required: false
-        },
-        isStandard: {
-            type: Boolean,
-            required: false
-        }
-    },
+    processingDays: Number,
     seller: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
