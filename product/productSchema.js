@@ -8,16 +8,66 @@ var Product   = new mongoose.Schema({
     shortDescription: String,
     category: String,
     subcategory: String,
-    color: Array,
-    customizable: { type: Boolean, default: false },
-    weight: Number,
-    price: Number,
+    color: {
+        isYellow: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isOrange: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isRed: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isBrown: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isGreen: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isBlue: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isViolette: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isWhite: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isBlack: {
+            type: Boolean,
+            required: true,
+            default: false
+        }
+    },
+    weight: String,
+    price: String,
     stock: Number,
-    orderedNum: { type: Number, default: 0 },
-    listingPeriod: { type: Number, default: 120 },
-    isActive: { type: Boolean, default: true },
-    updated: {type: Date, default: Date.now},
+    isActive: {
+        type: Boolean,
+        default: true
+    },
+    updated: {
+        type: Date,
+        default: Date.now
+    },
     imagePath: String,
+    processingDays: Number,
     seller: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
