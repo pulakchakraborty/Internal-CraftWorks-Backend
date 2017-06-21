@@ -11,39 +11,48 @@ var Product   = new mongoose.Schema({
     color: {
         isYellow: {
             type: Boolean,
-            required: false
+            required: true,
+            default: false
         },
         isOrange: {
             type: Boolean,
-            required: false
+            required: true,
+            default: false
         },
         isRed: {
             type: Boolean,
-            required: false
+            required: true,
+            default: false
         },
         isBrown: {
             type: Boolean,
-            required: false
+            required: true,
+            default: false
         },
         isGreen: {
             type: Boolean,
-            required: false
+            required: true,
+            default: false
         },
         isBlue: {
             type: Boolean,
-            required: false
+            required: true,
+            default: false
         },
         isViolette: {
             type: Boolean,
-            required: false
+            required: true,
+            default: false
         },
         isWhite: {
             type: Boolean,
-            required: false
+            required: true,
+            default: false
         },
         isBlack: {
             type: Boolean,
-            required: false
+            required: true,
+            default: false
         }
     },
     weight: String,
