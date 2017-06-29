@@ -1,7 +1,10 @@
+var fs = require('fs');
 // importing Product model
 var Product = require('./productSchema');
 exports.postProduct = function(req, res) {
     var product = new Product(req.body);
+    var targetImageDir = './../CraftWorks-Frontend/src/assets/img/products/';
+    product.imagePath = 'src/assets/img/products/' + product._id + '.jpg';
     //do not allow user to fake identity. The user who posts the product must be the same user that is logged in
     if (!req.user.equals(product.seller)) {
         res.sendStatus(401);
@@ -12,6 +15,15 @@ exports.postProduct = function(req, res) {
             res.status(400).send(err);
             return;
         }
+
+        if(req.files.file) {
+            return fs.rename(req.files.file.path, targetImageDir + m._id + '.jpg', function(err) {
+                if(err)
+                    return res.status(500).send(err);
+                res.status(201).json({success: true, lastID: m._id});
+            });
+        }
+        //res.status(201).json({success: true, lastID: m._id});
         res.status(201).json(m);
     });
 };
