@@ -1,15 +1,18 @@
 var fs = require('fs');
 // importing Product model
 var Product = require('./productSchema');
+var Category = require('./../category/categorySchema');
 exports.postProduct = function(req, res) {
     var product = new Product(req.body);
     var targetImageDir = './../CraftWorks-Frontend/src/assets/img/products/';
     product.imagePath = 'src/assets/img/products/' + product._id + '.jpg';
+
     //do not allow user to fake identity. The user who posts the product must be the same user that is logged in
     if (!req.user.equals(product.seller)) {
         res.sendStatus(401);
         return;
     }
+
     product.save(function(err, m) {
         if (err) {
             res.status(400).send(err);
@@ -26,6 +29,30 @@ exports.postProduct = function(req, res) {
         //res.status(201).json({success: true, lastID: m._id});
         res.status(201).json(m);
     });
+
+    //update the respective category with product reference
+    if (product.subcategory) {
+        Category.update(
+            { name: product.subcategory },
+            { $push: { products: product._id } },
+            function (err) {
+                if (err) {
+                    res.status(400).send(err);
+                }
+            }
+        );
+    }
+    else {
+        Category.update(
+            { name: product.category },
+            { $push: { products: product._id } },
+            function (err) {
+                if (err) {
+                    res.status(400).send(err);
+                }
+            }
+        );
+    }
 };
 
 // Create endpoint /api/products for GET
