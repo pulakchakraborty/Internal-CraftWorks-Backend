@@ -22,6 +22,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
+    "connect-multiparty": "^2.0.0",
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "express-unless": "^0.3.0",

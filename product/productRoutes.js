@@ -6,6 +6,7 @@ function productRoutes(passport) {
     var productController = require('./productController');
     var router = require('express').Router();
     var unless = require('express-unless');
+    var multiparty = require('connect-multiparty')({uploadDir: './tmp'});
 
     var mw = passport.authenticate('jwt', {session: false});
     mw.unless = unless;
@@ -14,12 +15,12 @@ function productRoutes(passport) {
     router.use(mw.unless({method: ['GET', 'OPTIONS']}));
 
     router.route('/')
-        .post(productController.postProduct)
+        .post(multiparty, productController.postProduct)
         .get(productController.getProducts);
 
     router.route('/:product_id')
         .get(productController.getProduct)
-        .put(productController.putProduct)
+        .post(multiparty, productController.updateProduct)
         .delete(productController.deleteProduct);
 
     router.route('/seller/:seller_id')

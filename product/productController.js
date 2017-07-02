@@ -1,19 +1,58 @@
+var fs = require('fs');
 // importing Product model
 var Product = require('./productSchema');
+var Category = require('./../category/categorySchema');
 exports.postProduct = function(req, res) {
     var product = new Product(req.body);
+    var targetImageDir = './../CraftWorks-Frontend/src/assets/img/products/';
+    product.imagePath = 'src/assets/img/products/' + product._id + '.jpg';
+
     //do not allow user to fake identity. The user who posts the product must be the same user that is logged in
     if (!req.user.equals(product.seller)) {
         res.sendStatus(401);
         return;
     }
+
     product.save(function(err, m) {
         if (err) {
             res.status(400).send(err);
             return;
         }
+
+        if(req.files.file) {
+            return fs.rename(req.files.file.path, targetImageDir + m._id + '.jpg', function(err) {
+                if(err)
+                    return res.status(500).send(err);
+                res.status(201).json({success: true, lastID: m._id});
+            });
+        }
+        //res.status(201).json({success: true, lastID: m._id});
         res.status(201).json(m);
     });
+
+    //update the respective category with product reference
+    if (product.subcategory) {
+        Category.update(
+            { name: product.subcategory },
+            { $push: { products: product._id } },
+            function (err) {
+                if (err) {
+                    res.status(400).send(err);
+                }
+            }
+        );
+    }
+    else {
+        Category.update(
+            { name: product.category },
+            { $push: { products: product._id } },
+            function (err) {
+                if (err) {
+                    res.status(400).send(err);
+                }
+            }
+        );
+    }
 };
 
 // Create endpoint /api/products for GET
@@ -56,7 +95,11 @@ exports.getSellerProducts = function(req, res) {
 };
 
 // Create endpoint /api/products/:product_id for PUT
-exports.putProduct = function(req, res) {
+exports.updateProduct = function(req, res) {
+    var targetImageDir = './../CraftWorks-Frontend/src/assets/img/products/';
+
+
+    //console.log(req.body);
     // Use the Product model to find a specific product and update it
     Product.findByIdAndUpdate(
         req.params.product_id,
@@ -71,6 +114,15 @@ exports.putProduct = function(req, res) {
                 res.status(400).send(err);
                 return;
             }
+            //update product image
+            if(req.files.file) {
+                console.log("Image file was sent");
+                return fs.rename(req.files.file.path, targetImageDir + req.params.product_id + '.jpg', function(err) {
+                    if(err)
+                        return res.status(500).send(err);
+                    res.status(201).json({success: true, lastID: req.params.product_id});
+                });
+            }
             res.json(product);
         });
 };
@@ -83,7 +135,38 @@ exports.deleteProduct = function(req, res) {
             res.status(400).send(err);
             return;
         }
-        m.remove();
+
+        //delete the product reference from respective category
+        if (m.subcategory) {
+            Category.update(
+                { name: m.subcategory },
+                { $pull: { products: m._id } },
+                function (err) {
+                    if (err) {
+                        res.status(400).send(err);
+                    }
+                    console.log('Product reference removed from sub-category!');
+                }
+            );
+        }
+        else {
+            Category.update(
+                { name: m.category },
+                { $pull: { products: m._id } },
+                function (err) {
+                    if (err) {
+                        res.status(400).send(err);
+                    }
+                    console.log('Product reference removed from category!');
+                }
+            );
+        }
+
+        //remove the product from products collection
+        m.remove(function(err) {
+            if (err) throw err;
+            console.log('Product successfully deleted!');
+        });
         res.sendStatus(200);
     });
 };

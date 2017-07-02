@@ -8,7 +8,6 @@ var Category   = new mongoose.Schema({
     info: String,
     parent: String,
     category: String,
-    active: { type: Boolean, default: true },
     updated: {type: Date, default: Date.now},
     imagePath: String,
     products: [{
