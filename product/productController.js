@@ -122,7 +122,38 @@ exports.deleteProduct = function(req, res) {
             res.status(400).send(err);
             return;
         }
-        m.remove();
+
+        //delete the product reference from respective category
+        if (m.subcategory) {
+            Category.update(
+                { name: m.subcategory },
+                { $pull: { products: m._id } },
+                function (err) {
+                    if (err) {
+                        res.status(400).send(err);
+                    }
+                    console.log('Product reference removed from sub-category!');
+                }
+            );
+        }
+        else {
+            Category.update(
+                { name: m.category },
+                { $pull: { products: m._id } },
+                function (err) {
+                    if (err) {
+                        res.status(400).send(err);
+                    }
+                    console.log('Product reference removed from category!');
+                }
+            );
+        }
+
+        //remove the product from products collection
+        m.remove(function(err) {
+            if (err) throw err;
+            console.log('Product successfully deleted!');
+        });
         res.sendStatus(200);
     });
 };
