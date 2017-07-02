@@ -70,13 +70,16 @@ exports.getProducts = function(req, res) {
 exports.getProduct = function(req, res) {
 
     // Use the Product model to find a specific product
-    Product.findById(req.params.product_id, function(err, product) {
-        if (err) {
-            res.status(400).send(err)
-            return;
-        };
-
-        res.json(product);
+    Product.findById(req.params.product_id)
+        .populate('seller')
+        .exec(function(err, product) {
+            if (err) {
+                res.status(400).send(err)
+                return;
+            };
+            if(!product)
+                return res.status(404).send();
+            res.json(product);
     });
 };
 
@@ -89,7 +92,8 @@ exports.getSellerProducts = function(req, res) {
             res.status(400).send(err)
             return;
         };
-
+        if(!products)
+            return res.status(404).send();
         res.json(products);
     });
 };
