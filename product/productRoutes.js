@@ -20,7 +20,7 @@ function productRoutes(passport) {
 
     router.route('/:product_id')
         .get(productController.getProduct)
-        .put(productController.putProduct)
+        .post(multiparty, productController.updateProduct)
         .delete(productController.deleteProduct);
 
     router.route('/seller/:seller_id')

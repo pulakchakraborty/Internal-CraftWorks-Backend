@@ -95,7 +95,11 @@ exports.getSellerProducts = function(req, res) {
 };
 
 // Create endpoint /api/products/:product_id for PUT
-exports.putProduct = function(req, res) {
+exports.updateProduct = function(req, res) {
+    var targetImageDir = './../CraftWorks-Frontend/src/assets/img/products/';
+
+
+    //console.log(req.body);
     // Use the Product model to find a specific product and update it
     Product.findByIdAndUpdate(
         req.params.product_id,
@@ -109,6 +113,15 @@ exports.putProduct = function(req, res) {
             if (err) {
                 res.status(400).send(err);
                 return;
+            }
+            //update product image
+            if(req.files.file) {
+                console.log("Image file was sent");
+                return fs.rename(req.files.file.path, targetImageDir + req.params.product_id + '.jpg', function(err) {
+                    if(err)
+                        return res.status(500).send(err);
+                    res.status(201).json({success: true, lastID: req.params.product_id});
+                });
             }
             res.json(product);
         });
