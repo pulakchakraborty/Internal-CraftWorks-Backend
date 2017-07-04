@@ -1,29 +1,28 @@
 {
-  "name": "moviebass",
+  "name": "CraftWorks-Backend",
   "version": "1.0.0",
-  "description": "Movie backend as a service",
+  "description": "CraftWorks backend as a service",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/sebischair/sebamaster-movie-backend"
+    "url": "https://github.com/pulakchakraborty/Internal-CraftWorks-Backend"
   },
   "keywords": [
-    "movie-backend",
-    "seba",
-    "master"
+    "CraftWorks-backend"
   ],
-  "author": "sebis",
+  "author": "Pulak Chakraborty",
   "license": "ISC",
   "bugs": {
-    "url": "https://bitbucket.org/sebischair/sebamaster-movie-backend"
+    "url": "https://github.com/pulakchakraborty/Internal-CraftWorks-Backend"
   },
-  "homepage": "https://bitbucket.org/sebischair/sebamaster-movie-backend#readme",
+  "homepage": "https://github.com/pulakchakraborty/Internal-CraftWorks-Backend#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
+    "connect-multiparty": "^2.0.0",
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "express-unless": "^0.3.0",

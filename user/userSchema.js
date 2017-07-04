@@ -2,15 +2,110 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = mongoose.Schema({
+
+
     username: {
         type: String,
         required: true,
         unique: true
     },
+
+
+    firstName: {
+        type: String,
+        required: false
+    },
+
+    lastName: {
+        type: String,
+        required: false
+    },
+
+    email: {
+        type: String,
+        required: false,
+        unique: true
+    },
+
     password: {
         type: String,
         required: true
+    },
+
+    addressLine1: {
+        type: String,
+        required: false
+    },
+
+    addressLine2: {
+        type: String,
+        required: false
+    },
+
+    city: {
+        type: String,
+        required: false
+    },
+
+    state: {
+        type: String,
+        required: false
+    },
+
+    zip: {
+        type: Number,
+        required: false
+    },
+
+    phone: {
+        type: String,
+        required: false
+    },
+
+    paymentMethod: {
+        isIban: {
+            type: Boolean,
+            required: false
+        },
+        isPaypal: {
+            type: Boolean,
+            required: false
+        }
+    },
+
+    iban: {
+        type: String,
+        required: false
+    },
+
+    paypal: {
+        type: String,
+        required: false
+    },
+
+    isDesigner: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+
+    isFeatured: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+
+    imagePath: {
+        type: String,
+        required: false
+    },
+
+    deliveryTime: {
+        type: Number,
+        required: true,
+        default: 5
     }
+
 });
 
 userSchema.pre('save', function(next) {
