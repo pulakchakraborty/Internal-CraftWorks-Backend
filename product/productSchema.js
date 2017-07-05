@@ -9,8 +9,14 @@ var Product   = new mongoose.Schema({
         type: String,
         es_indexed:true
     },
-    description: String,
-    shortDescription: String,
+    description: {
+        type: String,
+        es_indexed:true
+    },
+    shortDescription: {
+        type: String,
+        es_indexed:true
+    },
     category: String,
     subcategory: String,
     color: {
@@ -81,7 +87,7 @@ var Product   = new mongoose.Schema({
 
 Product.plugin(mongoosastic, {
     esClient: esClient
-})
+});
 
 // Export the Mongoose model
 module.exports = mongoose.model('Product', Product);
