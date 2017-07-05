@@ -1,9 +1,14 @@
 // Load required packages
 var mongoose = require('mongoose');
+var mongoosastic = require('mongoosastic');
+var esClient = require('./../elasticsearch-connection');
 
 // Define our product schema
 var Product   = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        es_indexed:true
+    },
     description: String,
     shortDescription: String,
     category: String,
@@ -73,6 +78,10 @@ var Product   = new mongoose.Schema({
         ref: 'User'
     }
 });
+
+Product.plugin(mongoosastic, {
+    esClient: esClient
+})
 
 // Export the Mongoose model
 module.exports = mongoose.model('Product', Product);
