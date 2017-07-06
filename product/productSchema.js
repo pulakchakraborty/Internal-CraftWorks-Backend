@@ -67,7 +67,10 @@ var Product   = new mongoose.Schema({
         }
     },
     weight: String,
-    price: String,
+    price: {
+        type: String,
+        es_indexed: true
+    },
     stock: Number,
     isActive: {
         type: Boolean,
@@ -77,7 +80,10 @@ var Product   = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    imagePath: String,
+    imagePath: {
+        type: String,
+        es_indexed:true
+    },
     processingDays: Number,
     seller: {
         type: mongoose.Schema.Types.ObjectId,
