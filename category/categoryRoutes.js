@@ -20,6 +20,9 @@ function categoryRoutes(passport) {
     router.route('/parentCategories')
         .get(categoryController.getParentCategories);
 
+    router.route('/:parentCategory_name/subCategories')
+        .get(categoryController.getSubCategories);
+
     router.route('/:category_id')
         .get(categoryController.getCategory)
         .put(categoryController.putCategory)
