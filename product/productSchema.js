@@ -17,8 +17,14 @@ var Product   = new mongoose.Schema({
         type: String,
         es_indexed:true
     },
-    category: String,
-    subcategory: String,
+    category: {
+        type: String,
+        es_indexed:true
+    },
+    subcategory: {
+        type: String,
+        es_indexed:true
+    },
     color: {
         isYellow: {
             type: Boolean,
