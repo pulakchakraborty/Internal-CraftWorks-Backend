@@ -57,7 +57,24 @@ exports.postProduct = function(req, res) {
 
 // Create endpoint /api/products for GET
 exports.getProducts = function(req, res) {
+    // console.log(req);
     Product.find(function(err, products) {
+        if (err) {
+            res.status(400).send(err);
+            return;
+        }
+        res.json(products);
+    });
+};
+
+// Create endpoint /api/products/getspecificproducts for POST
+exports.getSpecificProducts = function(req, res) {
+    const ids = req.body.ids;
+    Product.find({ 
+        _id: {
+            $in: ids
+        }
+    }, function(err, products) {
         if (err) {
             res.status(400).send(err);
             return;
