@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 // Define our movie schema
 var Category   = new mongoose.Schema({
     name: String,
-    slug: String,
     info: String,
     parent: String,
     category: String,

@@ -78,32 +78,14 @@ var userSchema = mongoose.Schema({
         required: false
     },
 
-    paypal: {
+    bic: {
         type: String,
         required: false
-    },
-
-    isDesigner: {
-        type: Boolean,
-        required: true,
-        default: true
-    },
-
-    isFeatured: {
-        type: Boolean,
-        required: true,
-        default: false
     },
 
     imagePath: {
         type: String,
         required: false
-    },
-
-    deliveryTime: {
-        type: Number,
-        required: true,
-        default: 5
     }
 
 });
