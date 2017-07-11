@@ -86,6 +86,7 @@ exports.getSpecificProducts = function(req, res) {
 // Create endpoint /api/products/:product_id for GET
 exports.getProduct = function(req, res) {
 
+    console.log(req.params.product_id);
     // Use the Product model to find a specific product
     Product.findById(req.params.product_id)
         .populate('seller')
