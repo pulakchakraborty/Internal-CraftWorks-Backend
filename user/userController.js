@@ -35,7 +35,7 @@ module.exports.login = function(req, res){
 };
 
 // Create endpoint /api/user/:user_id for GET
-exports.getUser = function(req, res) {
+module.exports.getUser = function(req, res) {
 
     // console.log(req.params.user_id);
     // Use the user model to find a specific user
