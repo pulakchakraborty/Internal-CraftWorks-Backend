@@ -30,7 +30,7 @@ stream.on('close', function() {
 
 
 // Show the the user whether any error come to the server
-stream.on('error', function()  {
+stream.on('error', function(err)  {
     console.log(err);
 });
 
