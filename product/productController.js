@@ -30,20 +30,26 @@ stream.on('close', function() {
 
 
 // Show the the user whether any error come to the server
-stream.on('error', function()  {
+stream.on('error', function(err)  {
     console.log(err);
 });
 
 // Search a product based on a keyword
 exports.searchProduct = function(req, res, next) {
-    console.log(req.body);
-    query = {
-        "multi_match": {
-            query: req.params.keyword,
-            type: "phrase_prefix",
-            fields: ["name", "description", "shortDescription"]
-        }
-    };
+    if (req.params.keyword === 'all') {
+        query = {
+            "match_all": {}
+        };
+    }
+    else {
+        query = {
+            "multi_match": {
+                query: req.params.keyword,
+                type: "phrase_prefix",
+                fields: ["name", "description", "shortDescription"]
+            }
+        };
+    }
 
     Product.search(query, function(err, results) {
                if(err) return next(err);
