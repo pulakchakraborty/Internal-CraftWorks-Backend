@@ -2,6 +2,62 @@ var fs = require('fs');
 // importing Product model
 var Product = require('./productSchema');
 var Category = require('./../category/categorySchema');
+
+// Creating bridge between  Product database and replica elastic search
+Product.createMapping = function(err, res) {
+
+    if(err){
+        console.log("Error Creating Mapping");
+        console.log("Error");
+    }  else{
+        console.log("Mapping Created");
+console.log(res);
+}
+};
+
+var stream = Product.synchronize();
+var count = 0;
+
+// Count the amount of documents
+stream.on('data', function() {
+    count++;
+});
+
+// give the count of document after close
+stream.on('close', function() {
+    console.log("Indexed " + count + " Documents");
+});
+
+
+// Show the the user whether any error come to the server
+stream.on('error', function(err)  {
+    console.log(err);
+});
+
+// Search a product based on a keyword
+exports.searchProduct = function(req, res, next) {
+    if (req.params.keyword === 'all') {
+        query = {
+            "match_all": {}
+        };
+    }
+    else {
+        query = {
+            "multi_match": {
+                query: req.params.keyword,
+                type: "phrase_prefix",
+                fields: ["name", "description", "shortDescription"]
+            }
+        };
+    }
+
+    Product.search(query, function(err, results) {
+               if(err) return next(err);
+               res.json(results.hits.hits);
+        }
+    );
+};
+
 exports.postProduct = function(req, res) {
     var product = new Product(req.body);
     var targetImageDir = './../CraftWorks-Frontend/src/assets/img/products/';

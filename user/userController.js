@@ -1,6 +1,7 @@
 var Config = require('../config/config.js');
 var User = require('./userSchema');
 var jwt = require('jwt-simple');
+var fs = require('fs');
 
 module.exports.login = function(req, res){
 
@@ -34,6 +35,7 @@ module.exports.login = function(req, res){
 
 };
 
+/*
 module.exports.signup = function(req, res){
     if(!req.body.username){
         res.status(400).send('username required');
@@ -56,6 +58,47 @@ module.exports.signup = function(req, res){
         }
 
         res.status(201).json({token: createToken(user)});
+    });
+};
+*/
+
+module.exports.signup = function(req, res){
+    if(!req.body.username){
+        res.status(400).send('username required');
+        return;
+    }
+    if(!req.body.password){
+        res.status(400).send('password required');
+        return;
+    }
+
+    var user = new User(req.body);
+    var targetImageDir = './../CraftWorks-Frontend/src/assets/img/users/';
+    user.imagePath = 'src/assets/img/users/' + user._id + '.jpg';
+
+    //user.username = req.body.username;
+    //user.password = req.body.password;
+
+    user.save(function(err, m) {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+
+        if(req.files.file) {
+            console.log("Inside if image block");
+            return fs.rename(req.files.file.path, targetImageDir + m._id + '.jpg', function(err) {
+                if(err) {
+                    console.log("Inside if image error block");
+                    return res.status(500).send(err);
+                }
+                //res.status(201).json({success: true, lastID: m._id});
+                res.status(201).json({token: createToken(user)});
+                console.log("image upload success");
+            });
+        }
+        //res.status(201).json({token: createToken(user)});
+
     });
 };
 
