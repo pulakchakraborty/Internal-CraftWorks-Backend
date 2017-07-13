@@ -34,6 +34,24 @@ module.exports.login = function(req, res){
 
 };
 
+// Create endpoint /api/user/:user_id for GET
+module.exports.getUser = function(req, res) {
+
+    // console.log(req.params.user_id);
+    // Use the user model to find a specific user
+    User.findById(req.params.user_id)
+        .exec(function(err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err)
+                return;
+            };
+            if(!user)
+                return res.status(404).send();
+            res.json(user);
+        });
+};
+
 module.exports.signup = function(req, res){
     if(!req.body.username){
         res.status(400).send('username required');

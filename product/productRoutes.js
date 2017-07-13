@@ -12,11 +12,14 @@ function productRoutes(passport) {
     mw.unless = unless;
 
     //middleware
-    router.use(mw.unless({method: ['GET', 'OPTIONS']}));
+    router.use(mw.unless({method: ['GET', 'OPTIONS', 'POST']}));
 
     router.route('/')
         .post(multiparty, productController.postProduct)
         .get(productController.getProducts);
+
+    console.log(productController.getSpecificProducts);
+    router.post('/getspecificproducts', productController.getSpecificProducts);
 
     router.route('/:product_id')
         .get(productController.getProduct)
@@ -25,6 +28,7 @@ function productRoutes(passport) {
 
     router.route('/seller/:seller_id')
         .get(productController.getSellerProducts);
+
 
     return router;
 }
