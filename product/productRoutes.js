@@ -12,7 +12,7 @@ function productRoutes(passport) {
     mw.unless = unless;
 
     //middleware
-    router.use(mw.unless({method: ['GET', 'OPTIONS', 'POST']}));
+    router.use(mw.unless({method: ['GET', 'OPTIONS']}));
 
     router.route('/')
         .post(multiparty, productController.postProduct)
