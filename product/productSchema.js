@@ -1,13 +1,30 @@
 // Load required packages
 var mongoose = require('mongoose');
+var mongoosastic = require('mongoosastic');
+var esClient = require('./../elasticsearch-connection');
 
 // Define our product schema
 var Product   = new mongoose.Schema({
-    name: String,
-    description: String,
-    shortDescription: String,
-    category: String,
-    subcategory: String,
+    name: {
+        type: String,
+        es_indexed:true
+    },
+    description: {
+        type: String,
+        es_indexed:true
+    },
+    shortDescription: {
+        type: String,
+        es_indexed:true
+    },
+    category: {
+        type: String,
+        es_indexed:true
+    },
+    subcategory: {
+        type: String,
+        es_indexed:true
+    },
     color: {
         isYellow: {
             type: Boolean,
@@ -56,7 +73,10 @@ var Product   = new mongoose.Schema({
         }
     },
     weight: String,
-    price: String,
+    price: {
+        type: String,
+        es_indexed: true
+    },
     stock: Number,
     isActive: {
         type: Boolean,
@@ -66,12 +86,19 @@ var Product   = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    imagePath: String,
+    imagePath: {
+        type: String,
+        es_indexed:true
+    },
     processingDays: Number,
     seller: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
+});
+
+Product.plugin(mongoosastic, {
+    esClient: esClient
 });
 
 // Export the Mongoose model

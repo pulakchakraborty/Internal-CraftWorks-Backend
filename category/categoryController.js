@@ -24,6 +24,29 @@ exports.getCategories = function(req, res) {
         res.json(categories);
     });
 };
+
+// Create endpoint to return all parent categories
+exports.getParentCategories = function(req, res) {
+    Category.find({"parent": "/"}, function(err, categories) {
+        if (err) {
+            res.status(400).send(err);
+            return;
+        }
+        res.json(categories);
+    });
+};
+
+// Create endpoint to return all sub-categories for a given parent category
+exports.getSubCategories = function(req, res) {
+    Category.find({"parent": "/" + req.params.parentCategory_name}, function(err, categories) {
+        if (err) {
+            res.status(400).send(err);
+            return;
+        }
+        res.json(categories);
+    });
+};
+
 // Create endpoint /api/categories/:category_id for GET
 exports.getCategory = function(req, res) {
     // Use the Category model to find a specific category

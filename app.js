@@ -38,6 +38,6 @@ var categoryRoutes = require("./category/categoryRoutes");
 
 app.use('/api/user', userRoutes(passport));
 app.use('/api/products', productRoutes(passport));
-app.use('/api/category', categoryRoutes(passport));
+app.use('/api/categories', categoryRoutes(passport));
 module.exports = app;
 

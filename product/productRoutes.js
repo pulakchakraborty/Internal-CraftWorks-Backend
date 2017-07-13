@@ -18,8 +18,10 @@ function productRoutes(passport) {
         .post(multiparty, productController.postProduct)
         .get(productController.getProducts);
 
-    console.log(productController.getSpecificProducts);
     router.post('/getspecificproducts', productController.getSpecificProducts);
+
+    router.route('/search/:keyword')
+        .post(productController.searchProduct);
 
     router.route('/:product_id')
         .get(productController.getProduct)
