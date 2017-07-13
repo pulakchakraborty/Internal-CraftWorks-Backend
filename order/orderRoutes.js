@@ -18,7 +18,7 @@ function orderRoutes(passport) {
     router.use(mw.unless({method: ['GET', 'OPTIONS']}));
 
     router.route('/')
-        .post(multiparty, orderController.postOrder)
+        .post(orderController.postOrder)
         .get(orderController.getOrders)
         .get(orderController.getOrder);
 
