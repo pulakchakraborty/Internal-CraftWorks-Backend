@@ -9,7 +9,7 @@ var Order = require('./orderSchema');
 
 
 exports.postOrder = function(req, res) {
-    var order = new order(req.body);
+    var order = new Order(req.body);
 
     //do not allow user to fake identity. The user who posts the order must be the same user that is logged in
     // if (!req.user.equals(user)) {
