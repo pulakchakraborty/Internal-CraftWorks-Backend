@@ -71,10 +71,11 @@ var Order   = new mongoose.Schema({
     isShipped: {
         type: Boolean
     },
-    product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
-    }
+
+    items: [{ name: String, quantity: String }],
+
+
+
 
 });
 

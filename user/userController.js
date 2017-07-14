@@ -64,7 +64,7 @@ module.exports.signup = function(req, res){
     }
 
     var user = new User(req.body);
-    var targetImageDir = './../CraftWorks-Frontend/src/assets/img/users/';
+    var targetImageDir = './../Internal-CraftWorks-Frontend/src/assets/img/users/';
     user.imagePath = 'src/assets/img/users/' + user._id + '.jpg';
 
     //user.username = req.body.username;
