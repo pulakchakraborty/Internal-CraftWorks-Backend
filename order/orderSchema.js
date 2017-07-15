@@ -1,16 +1,25 @@
-/**
- * Created by barbaraprommegger on 13/07/2017.
+ /** * Created by barbaraprommegger on 13/07/2017.
  */
 
-// Load required packages
+// load required packages
 var mongoose = require('mongoose');
 
 
 // Define our order schema
 var Order   = new mongoose.Schema({
-    addressLine1: {
+    firstName: {
         type: String,
         required: false
+    },
+
+    lastName: {
+        type: String,
+        required: false
+    },
+
+    addressLine1: {
+        type: String,
+        required: true
     },
 
     addressLine2: {
@@ -20,17 +29,17 @@ var Order   = new mongoose.Schema({
 
     city: {
         type: String,
-        required: false
+        required: true
     },
 
     state: {
         type: String,
-        required: false
+        required: true
     },
 
     zip: {
         type: Number,
-        required: false
+        required: true
     },
 
     payment: {
@@ -55,12 +64,13 @@ var Order   = new mongoose.Schema({
         isStandard: {
             type: Boolean,
             required: true,
-            default: false
+            default: true
         }
     },
 
     amountIsDue: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
 
     date: {
@@ -69,17 +79,22 @@ var Order   = new mongoose.Schema({
     },
 
     isShipped: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
 
-    items: [{ name: String, quantity: String }],
+    items: [{
+        name: String,
+        q: String
+    }],
 
-
-
+    buyer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+}
 
 });
 
 
 // Export the Mongoose model
 module.exports = mongoose.model('Order', Order);
-

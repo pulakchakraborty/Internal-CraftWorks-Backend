@@ -7,16 +7,22 @@ var fs = require('fs');
 var Order = require('./orderSchema');
 
 
-
+// post new order
 exports.postOrder = function(req, res) {
     var order = new Order(req.body);
 
-    //do not allow user to fake identity. The user who posts the order must be the same user that is logged in
-    // if (!req.user.equals(user)) {
-    //     res.sendStatus(401);
-    //     return;
-    // }
+    var order_request = req.body;
 
+    //set paymentmethod to boolean
+    if(order_request.payment == "isIBAN") {
+        order.payment.isIBAN = true;
+        order.payment.isPayPal = false;
+    } else {
+        order.payment.isIBAN = false;
+        order.payment.isPayPal = true;
+    }
+
+    //save order
     order.save(function(err, m) {
         if (err) {
             res.status(400).send(err);
