@@ -61,12 +61,17 @@ var Product   = new mongoose.Schema({
             required: true,
             default: false
         },
-        isWhite: {
+        isGrey: {
             type: Boolean,
             required: true,
             default: false
         },
         isBlack: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isPink: {
             type: Boolean,
             required: true,
             default: false
