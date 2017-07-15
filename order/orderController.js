@@ -1,28 +1,31 @@
 /**
  * Created by barbaraprommegger on 13/07/2017.
  */
-
 var fs = require('fs');
 // importing Product model
 var Order = require('./orderSchema');
 
 
-
+//post new Order
 exports.postOrder = function(req, res) {
     var order = new Order(req.body);
+    var order_request = req.body;
 
-    //do not allow user to fake identity. The user who posts the order must be the same user that is logged in
-    // if (!req.user.equals(user)) {
-    //     res.sendStatus(401);
-    //     return;
-    // }
+    //set paymentmethod boolean
+    if(order_request.payment == "isIBAN") {
+        order.payment.isIBAN = true;
+        order.payment.isPayPal = false;
+    } else {
+        order.payment.isIBAN = false;
+        order.payment.isPayPal = true;
+    }
 
+    //save order
     order.save(function(err, m) {
         if (err) {
             res.status(400).send(err);
             return;
         }
-        //res.status(201).json({success: true, lastID: m._id});
         res.status(201).json(m);
     });
 
@@ -30,7 +33,6 @@ exports.postOrder = function(req, res) {
 
 // Create endpoint /api/orders for GET
 exports.getOrders = function(req, res) {
-    // console.log(req);
     order.find(function(err, products) {
         if (err) {
             res.status(400).send(err);
