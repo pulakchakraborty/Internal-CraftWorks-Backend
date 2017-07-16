@@ -44,6 +44,7 @@ mongorestore dump/
 **set up Elasticsearch**
 
 * Install Elasticsearch on your machine globally. For detailed instructions, visit  [this link](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html#install-elasticsearch)
+* We used Elasticsearch version 2.4.4 and at the final testing the application worked as expected. Please consider using version 2.4.4 in case the search functionaity doesn't work with a higher version
 * Verify if Elasticsearch is working by visiting http://localhost:9200 from your favourite browser 
 
 **set up environment configuration**
