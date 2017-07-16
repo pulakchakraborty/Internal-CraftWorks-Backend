@@ -88,8 +88,9 @@ module.exports.signup = function(req, res){
                 console.log("image upload success");
             });
         }
-        //res.status(201).json({token: createToken(user)});
-
+        else {
+            res.status(201).json({token: createToken(user)});
+        }
     });
 };
 
