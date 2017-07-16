@@ -43,7 +43,7 @@ mongorestore dump/
 
 **set up Elasticsearch**
 
-* Install Elasticsearch on your machine globally. For detailed instructions, visit  [this link] (https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html#install-elasticsearch)
+* Install Elasticsearch on your machine globally. For detailed instructions, visit  [this link](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html#install-elasticsearch)
 * Verify if Elasticsearch is working by visiting http://localhost:9200 from your favourite browser 
 
 **set up environment configuration**
@@ -58,9 +58,11 @@ Note: While it is a good idea to have some configuration available for everyone,
 
 Note: Before running make sure that both the frontend and backend repositories are under a common root folder and named as it is. Otherwise the image uploads will not work. So the directory structure would be the following
 
+```
 /CraftWorks Webapp
     /Internal-CraftWorks-Frontend
     /Internal-CraftWorks-Backend
+```
 
 start the web server
 

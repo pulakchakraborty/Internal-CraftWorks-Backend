@@ -60,7 +60,7 @@ exports.searchProduct = function(req, res, next) {
 
 exports.postProduct = function(req, res) {
     var product = new Product(req.body);
-    var targetImageDir = './../CraftWorks-Frontend/src/assets/img/products/';
+    var targetImageDir = './../Internal-CraftWorks-Frontend/src/assets/img/products/';
     product.imagePath = 'src/assets/img/products/' + product._id + '.jpg';
 
     //do not allow user to fake identity. The user who posts the product must be the same user that is logged in
@@ -126,7 +126,7 @@ exports.getProducts = function(req, res) {
 // Create endpoint /api/products/getspecificproducts for POST
 exports.getSpecificProducts = function(req, res) {
     const ids = req.body.ids;
-    Product.find({ 
+    Product.find({
         _id: {
             $in: ids
         }
@@ -174,7 +174,7 @@ exports.getSellerProducts = function(req, res) {
 
 // Create endpoint /api/products/:product_id for PUT
 exports.updateProduct = function(req, res) {
-    var targetImageDir = './../CraftWorks-Frontend/src/assets/img/products/';
+    var targetImageDir = './../Internal-CraftWorks-Frontend/src/assets/img/products/';
 
 
     //console.log(req.body);
