@@ -85,3 +85,13 @@ mocha
 
 **Alternative/Additionally:** you could also use postman [postman](https://www.getpostman.com/)
 You need to import the test and environment from `test/rest.json.postman_collection` and `test/localhost.postman_environment`
+
+### Testing using postman
+
+You can use the already existing user with the following credentials to test the application backend using postman or create your own account.
+
+```
+username: BarbDesign
+password: BarbDesign
+```
+
