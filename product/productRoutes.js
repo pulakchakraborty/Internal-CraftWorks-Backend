@@ -21,7 +21,7 @@ function productRoutes(passport) {
     router.post('/getspecificproducts', productController.getSpecificProducts);
 
     router.route('/search/:keyword')
-        .post(productController.searchProduct);
+        .get(productController.searchProduct);
 
     router.route('/:product_id')
         .get(productController.getProduct)
